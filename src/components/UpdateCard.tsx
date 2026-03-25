@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Update, supabase } from '../lib/supabase'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/useAuth'
 import { UpdateForm } from './UpdateForm'
 
 type UpdateCardProps = {
