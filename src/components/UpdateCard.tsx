@@ -12,6 +12,7 @@ type UpdateCardProps = {
 export function UpdateCard({ update, onDeleted, onUpdated }: UpdateCardProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [isLiking, setIsLiking] = useState(false)
   const { user } = useAuth()
 
   const isOwner = user?.id === update.user_id
@@ -23,6 +24,29 @@ export function UpdateCard({ update, onDeleted, onUpdated }: UpdateCardProps) {
     hour: 'numeric',
     minute: '2-digit',
   })
+
+  const likes = update.likes ?? []
+  const likeCount = likes.length
+  const isLiked = user ? likes.some((like) => like.user_id === user.id) : false
+
+  const handleLike = async () => {
+    if (!user || isLiking) return
+
+    setIsLiking(true)
+    if (isLiked) {
+      await supabase
+        .from('likes')
+        .delete()
+        .eq('update_id', update.id)
+        .eq('user_id', user.id)
+    } else {
+      await supabase
+        .from('likes')
+        .insert({ update_id: update.id, user_id: user.id })
+    }
+    onUpdated()
+    setIsLiking(false)
+  }
 
   const handleDelete = async () => {
     if (!confirm('Are you sure you want to delete this update?')) return
@@ -81,6 +105,17 @@ export function UpdateCard({ update, onDeleted, onUpdated }: UpdateCardProps) {
           <p className="whitespace-pre-wrap" style={{ color: 'var(--color-text)' }}>
             {update.content}
           </p>
+          <div className="mt-3">
+            <button
+              onClick={handleLike}
+              disabled={!user || isLiking}
+              className={`like-button${isLiked ? ' liked' : ''}`}
+              aria-label={isLiked ? 'Unlike this update' : 'Like this update'}
+            >
+              <span aria-hidden="true">{isLiked ? '♥' : '♡'}</span>
+              <span data-testid="like-count">{likeCount}</span>
+            </button>
+          </div>
         </div>
 
         {isOwner && (

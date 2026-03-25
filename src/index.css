@@ -35,3 +35,28 @@ body {
 #root {
   min-height: 100vh;
 }
+
+.like-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.like-button:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.like-button.liked {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
+}
