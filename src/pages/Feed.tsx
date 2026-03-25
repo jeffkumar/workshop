@@ -20,6 +20,11 @@ export function Feed() {
           username,
           full_name,
           avatar_url
+        ),
+        likes (
+          update_id,
+          user_id,
+          created_at
         )
       `)
       .order('created_at', { ascending: false })

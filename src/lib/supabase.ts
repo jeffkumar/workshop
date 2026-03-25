@@ -20,4 +20,11 @@ export type Update = {
   created_at: string
   updated_at: string
   profiles?: Profile
+  likes?: Like[]
+}
+
+export type Like = {
+  update_id: string
+  user_id: string
+  created_at: string
 }
