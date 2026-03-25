@@ -27,6 +27,13 @@ Use this as the default playbook when you first enter the repo. Keep it practica
 - Unit tests: `npm test`
 - Build: `npm run build`
 
+### Known current lint baseline (important for PRs)
+- Run `npm run lint` early so CI behavior is predictable.
+- Current repo baseline (today) includes:
+  - error: `src/App.tsx` → `'ProtectedRoute' is defined but never used` (`@typescript-eslint/no-unused-vars`)
+  - warning: `src/context/AuthContext.tsx` → `react-refresh/only-export-components`
+- If your PR does not change these paths, call out that lint failure is pre-existing in your PR notes.
+
 ---
 
 ## 1) Auth area (`src/context`, `src/pages/Login.tsx`, `src/pages/Register.tsx`)
