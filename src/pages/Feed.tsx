@@ -15,13 +15,13 @@ export function Feed() {
       .from('updates')
       .select(`
         *,
-        profiles (
+        profiles!user_id (
           id,
           username,
           full_name,
           avatar_url
         ),
-        likes (
+        likes!update_id (
           update_id,
           user_id,
           created_at
