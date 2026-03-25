@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase, Update } from '../lib/supabase'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/useAuth'
 import { Layout } from '../components/Layout'
 import { UpdateForm } from '../components/UpdateForm'
 import { UpdateCard } from '../components/UpdateCard'

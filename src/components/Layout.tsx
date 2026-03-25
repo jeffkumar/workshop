@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/useAuth'
 
 export function Layout({ children }: { children: ReactNode }) {
   const { user, profile, signOut } = useAuth()
